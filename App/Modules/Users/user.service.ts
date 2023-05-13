@@ -24,3 +24,7 @@ export const createUserToDb = async (payload: IUser):Promise<IUser> => {
       console.log(getUsers);
       return getUsers
   }
+  export const getAdminUsersFromDB = async() => {
+      const admins = await User.getAdminUsers();
+      return admins
+  }

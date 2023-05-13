@@ -1,8 +1,8 @@
 import mongoose,{ Model, model,Schema } from "mongoose";
-import { IUser, IUserMethods } from "./user.interface";
+import { IUser, IUserMethods, UserModel } from "./user.interface";
 
 
-type UserModel = Model<IUser, {}, IUserMethods>;
+// type UserModel = Model<IUser, {}, IUserMethods>;
 const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     id: {
       type: String, required: true, unique: true,
@@ -45,6 +45,13 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
       type: String
     },
   })
+  UserSchema.static('getAdminUsers', async function getAdminUsers() {
+    const admin = await this.find({role: "admins"})
+    return admin
+  });
+
+
+
   // 3. Create a Model.
   UserSchema.method('fullName', function fullName() {
     return this.name.firstName + " " + this.name.lastName;
