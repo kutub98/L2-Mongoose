@@ -13,3 +13,11 @@ export interface IUser {
     EmergencyNumber: string,
     email?: string,
   }
+
+ export interface IUserMethods {
+    fullName(): string;
+  }
+
+
+  
+  
